@@ -1,0 +1,56 @@
+- name: Populate config files on the target system
+  hosts: "{{ hostname }}"
+  remote_user: "{{ username }}"
+
+  tasks:
+      - name: Create config directories
+        ansible.builtin.file:
+            state: directory
+            path: "~/.config/{{ item }}"
+            mode: u=rwx
+        loop:
+            - sway
+            - swaylock
+            - kickoff
+            - dunst
+            - waybar
+            - .gnupg
+
+      - name: Copy config files
+        ansible.builtin.copy:
+            src: "../configs/{{ item.src }}"
+            dest: "~/.config/{{ item.dest }}"
+            mode: u=rwx
+        loop:
+            - src: shared/alacritty.toml
+              dest: alacritty.toml
+
+            - src: "{{ type }}/sway"
+              dest: sway/config
+
+            - src: /shared/swaylock
+              dest: swaylock/config
+
+            - src: /shared/kickoff/
+              dest: kickoff/
+
+            - src: /shared/dunst
+              dest: dunst/dunstrc
+
+            - src: /shared/waybar_style.css
+              dest: waybar/style.css
+
+            - src: "{{ type }}/waybar"
+              dest: waybar/config
+
+            - src: /shared/starship.toml
+              dest: starship.toml
+
+            - src: /shared/gpg-agent.conf
+              dest: .gnupg/gpg-agent.conf
+
+      - name: Copy ZSH config
+        ansible.builtin.copy:
+            src: ../configs/shared/.zshrc
+            dest: ~/.zshrc
+            mode: u=rwx

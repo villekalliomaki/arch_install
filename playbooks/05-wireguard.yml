@@ -1,0 +1,17 @@
+- name: Configure and start/enable homelab wireguard
+  hosts: "{{ hostname }}"
+  remote_user: "{{ username }}"
+  become: true
+
+  tasks:
+      - name: Copy over configuration
+        ansible.builtin.copy:
+            src: "../secrets/wg/{{ hostname }}/wg0.conf"
+            dest: /etc/wireguard/wg0.conf
+            mode: u=rw
+
+      - name: Enable and start service
+        ansible.builtin.systemd_service:
+            name: wg-quick@wg0
+            state: started
+            enabled: true

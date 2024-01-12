@@ -1,0 +1,11 @@
+- name: Enable system services
+  hosts: "{{ hostname }}"
+  remote_user: "{{ username }}"
+
+  tasks:
+      - name: Enable syncthing
+        ansible.builtin.systemd_service:
+            name: syncthing
+            enabled: true
+            state: started
+            scope: user

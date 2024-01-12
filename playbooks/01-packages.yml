@@ -1,0 +1,102 @@
+- name: Install useful and required pacman packages
+  hosts: "{{ hostname }}"
+  remote_user: "{{ username }}"
+  become: true
+
+  tasks:
+      #
+      # Base packages
+      #
+
+      - name: Install pacman packages
+        become_user: root
+        community.general.pacman:
+            update_cache: true
+            package:
+                - firefox
+                - wireguard-tools
+                - alacritty
+                - zsh
+                - zsh-completions
+                - syncthing
+                - rustup
+                - go
+                - python
+                - base-devel
+                - git
+                - python-pexpect
+                - waybar
+                - starship
+                - ttf-firacode-nerd
+                - ttf-nerd-fonts-symbols
+                - noto-fonts
+                - noto-fonts-*
+                - ansible-core
+                - ansible
+
+      - name: Install desktop specific pacman packages
+        when: type == "desktop"
+        community.general.pacman:
+            package:
+                - opencl-nvidia
+
+      - name: Install laptop specific pacman packages
+        when: type == "laptop"
+        community.general.pacman:
+            package:
+                - opencl-clover-mesa
+
+      #
+      # AUR packages
+      #
+
+      - name: Clone yay repo
+        # Regular user has to have permissions, because yay can't be ran with root
+        become: false
+        ansible.builtin.git:
+            clone: true
+            update: true
+            repo: https://aur.archlinux.org/yay.git
+            dest: /tmp/yay
+
+      # https://github.com/DoTheEvo/ansible-arch/blob/cf3d0ea6ccaa4cbf6196f35327ffcb298d913e78/playbook_core.yml#L60
+      - name: Disable need for password for pacman to allow yay install
+        ansible.builtin.lineinfile:
+            path: /etc/sudoers.d/temp_allow_no_pswd_pacman
+            state: present
+            line: "ALL ALL=NOPASSWD: /usr/bin/pacman"
+            validate: /usr/sbin/visudo -cf %s
+            create: yes
+
+      # https://github.com/DoTheEvo/ansible-arch/blob/cf3d0ea6ccaa4cbf6196f35327ffcb298d913e78/playbook_core.yml#L75C5-L81C45
+      # Python module pexpect required for this:
+      #   sudo pacman -S python-pexpect
+      - name: Install yay using makepkg
+        become: false
+        ansible.builtin.expect:
+            chdir: /tmp/yay
+            command: makepkg -si
+            responses:
+                (?i)Proceed with installation: "y"
+
+      - name: Install yay packages (might take a while)
+        become: false
+        kewlfft.aur.aur:
+            use: yay
+            update_cache: true
+            name:
+                - kickoff
+                - vscodium
+                - darktable
+                - insomnia-bin
+                - yt-dlp
+                - mullvad-vpn
+                - oh-my-zsh-git
+                - ventoy
+                - wlsunset
+
+      # https://github.com/DoTheEvo/ansible-arch/blob/cf3d0ea6ccaa4cbf6196f35327ffcb298d913e78/playbook_core.yml#L83C5-L86C22
+      - name: Re-enable need for password for pacman
+        ansible.builtin.file:
+            path: /etc/sudoers.d/temp_allow_no_pswd_pacman
+            state: absent

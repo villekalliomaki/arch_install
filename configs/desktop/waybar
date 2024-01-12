@@ -1,0 +1,77 @@
+{
+    "position": "bottom",
+    "bar_id": "bar-0",
+    "ipc": true,
+    "height": 12,
+    "spacing": 5,
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode"
+    ],
+    "modules-center": [
+        "sway/window"
+    ],
+    "modules-right": [
+        "custom/output_headphones",
+        "custom/output_tv",
+        "idle_inhibitor",
+        "pulseaudio",
+        "network",
+        "clock",
+        "tray"
+    ],
+    "sway/window": {
+        "max-length": 60
+    },
+    "tray": {
+        "spacing": 8
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%d.%m.%Y}"
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon} 󰂯 {volume}% {format_source}",
+        "format-bluetooth-muted": "󰝟 {icon}󰂯 {format_source}",
+        "format-muted": "󰝟 {format_source}",
+        "format-source-muted": "󰍭",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰥰",
+            "headset": "󰋎",
+            "phone": "󰄜",
+            "car": "󰄋",
+            "default": [
+                "󰕿",
+                "",
+                "󰕾"
+            ]
+        },
+        "on-click": "pavucontrol"
+    },
+    "network": {
+        "format-wifi": "󰖩 {essid}/{frequency} ({signalStrength}%)",
+        "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "format-disconnected": "󰌙",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-right": "alacritty -e nmtui"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "custom/output_headphones": {
+        "format": "IN",
+        "on-click": "pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo"
+    },
+    "custom/output_tv": {
+        "format": "TV",
+        "on-click": "pactl set-default-sink alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2"
+    }
+}

@@ -1,0 +1,123 @@
+* {
+  font-family: Symbols Nerd Font Mono, Arimo Nerd Font;
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: black;
+  color: white;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+button {
+  box-shadow: inset 0 -1px transparent;
+  border: none;
+  border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+  background: inherit;
+  box-shadow: inset 0 -1px white;
+}
+
+#workspaces button {
+  padding: 0 3px;
+  background-color: transparent;
+  color: #ffffff;
+}
+
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+  border: 1px solid white;
+}
+
+#workspaces button.urgent {
+  box-shadow: inset 0 -3px red;
+}
+
+#mode {
+  border: 1px solid white;
+}
+
+#clock,
+#battery,
+#bluetooth,
+#network,
+#pulseaudio,
+#idle_inhibitor,
+#tray,
+#mode,
+#mpd {
+  padding: 0 5px;
+  color: white;
+  border-top: 1px solid white;
+}
+
+#window,
+#workspaces {
+  margin: 0 2px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
+
+#clock {
+  border: none;
+}
+
+#battery.charging,
+#battery.plugged {
+  border-bottom: 1px white;
+}
+
+@keyframes blink {
+  to {
+    border-top: 1px white;
+  }
+}
+
+#battery.critical:not(.charging) {
+  border: 1px red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#network.disconnected {
+  opacity: 0.5;
+}
+
+#pulseaudio.muted {
+  opacity: 0.5;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: red;
+}
+
+#bluetooth.on {
+  border-bottom: 1px solid white;
+}
+
+#idle_inhibitor.activated {
+  border-bottom: 1px solid white;
+}

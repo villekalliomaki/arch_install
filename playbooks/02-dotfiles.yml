@@ -54,3 +54,10 @@
             src: ../configs/shared/.zshrc
             dest: ~/.zshrc
             mode: u=rwx
+
+      - name: Copy SSH server config
+        become: true
+        ansible.builtin.copy:
+            src: ../configs/shared/sshd_config
+            dest: /etc/ssh/sshd_config
+            mode: u=rwx,o=r

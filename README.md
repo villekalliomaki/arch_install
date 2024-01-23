@@ -12,16 +12,20 @@ When running the playbooks to configure a system remotely, network routing has t
 4. Install python on the target: `sudo pacman -S python`.
 5. Add the hostname defined in the used inventory on the running computer in `~/.ssh/config`. It should have the normal user and not root.
 6. Create a new vars file for the target system.
-7. Populate the `./secrets` folder.
+7. Sync the `./secrets` folder.
 8. Install yay Ansible library: `ansible-galaxy collection install kewlfft.aur`.
 
-Example command: `ansible-playbook -i inventory --extra-vars=@vars/huron.yml --vault-password-file=secrets/ansible_vault_password -v playbooks/01-packages.yml`
+Example command:
+
+```
+ansible-playbook --vault-password-file=secrets/ansible_vault_password -i inventory --extra-vars=@vars/huron.yml playbooks/01-packages.yml
+```
 
 ## The `./secrets` directory
 
 It includes the Ansible vault password to decrypt all encrypted variables like passwords used in environment files. Also wireguard configurations are stored there.
 
-It should be synced inside the repository to all devices which run any playbooks with syncthing.
+It should be synced inside the repository to all devices with Syncthing which run any playbooks.
 
 ## Troubleshooting
 

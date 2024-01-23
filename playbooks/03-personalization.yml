@@ -60,3 +60,9 @@
 
       - name: Generate public key from private
         ansible.builtin.command: ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub
+
+      - name: Copy client config
+        ansible.builtin.copy:
+            src: ../secrets/ssh/config
+            dest: ~/.ssh/config
+            mode: 0600

@@ -105,7 +105,7 @@
         "format-icons": {
             "output": "",
             "input": "",
-            "output-input": "  ",
+            "output-input": "[ ]",
             "none": ""
         }
     }

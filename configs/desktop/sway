@@ -6,20 +6,20 @@ set $up k
 set $right l
 
 #### Monitors desktop
-# HDMI-A-1 (AOC top)
+# HDMI-A-1 (Dell top)
 output HDMI-A-1 transform 180
 output HDMI-A-1 pos 960 -1080 res 1920x1080
 # DP-2 (Samsung)
 output DP-2 pos 0 0 res 3840x2160
-# DP-1 (Dell right side)
-output DP-1 pos 3840 540 res 1920x1080
+# DP-1 (right side to 4k display)
+# output DP-1 pos 3840 540 res 1920x1080
 # Philips 4K tv
 output DP-3 pos -3840 0 scale 2.5 res 3840x2160
 
 # Workspaces in correct places
 workspace 1 output DP-2
-workspace 10 output DP-1
-workspace 7 output HDMI-A-1
+# workspace 10 output DP-1
+workspace 10 output HDMI-A-1
 workspace 0 output DP-3
 
 #### Backlight controls (https://www.reddit.com/r/swaywm/comments/fk08lu/comment/fkvhvkn/?utm_source=share&utm_medium=web2x&context=3)

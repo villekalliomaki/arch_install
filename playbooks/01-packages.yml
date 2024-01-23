@@ -30,9 +30,10 @@
                 - ttf-firacode-nerd
                 - ttf-nerd-fonts-symbols
                 - noto-fonts
-                - noto-fonts-*
                 - ansible-core
                 - ansible
+                - neovim
+                - tmux
 
       - name: Install desktop specific pacman packages
         when: type == "desktop"
@@ -76,6 +77,7 @@
         ansible.builtin.expect:
             chdir: /tmp/yay
             command: makepkg -si
+            timeout: 300
             responses:
                 (?i)Proceed with installation: "y"
 
@@ -91,12 +93,22 @@
                 - insomnia-bin
                 - yt-dlp
                 - mullvad-vpn
-                - oh-my-zsh-git
                 - ventoy
                 - wlsunset
+                - sway-audio-idle-inhibit-git
+                - flutter
 
       # https://github.com/DoTheEvo/ansible-arch/blob/cf3d0ea6ccaa4cbf6196f35327ffcb298d913e78/playbook_core.yml#L83C5-L86C22
       - name: Re-enable need for password for pacman
         ansible.builtin.file:
             path: /etc/sudoers.d/temp_allow_no_pswd_pacman
             state: absent
+
+      - name: Install oh-my-zsh
+        become: false
+        # rc != 0 if already installed
+        ignore_errors: true
+        # Command from: https://github.com/ohmyzsh/ohmyzsh#basic-installation
+        #
+        # Have to use shell and not command here
+        ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

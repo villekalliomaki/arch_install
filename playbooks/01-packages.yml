@@ -36,6 +36,7 @@
                 - tmux
                 - clang
                 - imv
+                - perl-image-exiftool
 
       - name: Install desktop specific pacman packages
         when: type == "desktop"

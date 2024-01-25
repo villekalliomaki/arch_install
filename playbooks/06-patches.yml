@@ -1,0 +1,6 @@
+# Small patches no related to anything specifically to run last
+- name: Install useful and required pacman packages
+  hosts: "{{ hostname }}"
+  remote_user: "{{ username }}"
+
+  tasks:

@@ -49,6 +49,9 @@
             - src: /shared/gpg-agent.conf
               dest: .gnupg/gpg-agent.conf
 
+            - src: /shared/imv_config
+              dest: imv_config
+
       - name: Copy ZSH config
         ansible.builtin.copy:
             src: ../configs/shared/.zshrc

@@ -34,6 +34,8 @@
                 - ansible
                 - neovim
                 - tmux
+                - clang
+                - imv
 
       - name: Install desktop specific pacman packages
         when: type == "desktop"
@@ -70,7 +72,7 @@
             create: yes
 
       # https://github.com/DoTheEvo/ansible-arch/blob/cf3d0ea6ccaa4cbf6196f35327ffcb298d913e78/playbook_core.yml#L75C5-L81C45
-      # Python module pexpect required for this:
+      # Python module "pexpect" required for this:
       #   sudo pacman -S python-pexpect
       - name: Install yay using makepkg
         become: false
@@ -97,6 +99,7 @@
                 - wlsunset
                 - sway-audio-idle-inhibit-git
                 - flutter
+                - ungoogled-chromium
 
       # https://github.com/DoTheEvo/ansible-arch/blob/cf3d0ea6ccaa4cbf6196f35327ffcb298d913e78/playbook_core.yml#L83C5-L86C22
       - name: Re-enable need for password for pacman
@@ -112,3 +115,10 @@
         #
         # Have to use shell and not command here
         ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+      #
+      # Flutter
+      #
+      - name: Fix /opt/flutter repository
+        become: false
+        ansible.builtin.command: git config --global --add safe.directory /opt/flutter

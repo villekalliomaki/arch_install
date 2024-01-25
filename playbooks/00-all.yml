@@ -1,0 +1,23 @@
+# Run the complete installation
+- name: Run all playbooks
+  hosts: "{{ hostname }}"
+  remote_user: "{{ username }}"
+
+  tasks:
+      - name: Packages
+        ansible.builtin.import_playbook: 01-packages.yml
+
+      - name: .files
+        ansible.builtin.import_playbook: 02-dotfiles.yml
+
+      - name: Personalization
+        ansible.builtin.import_playbook: 03-personalization.yml
+
+      - name: Services
+        ansible.builtin.import_playbook: 04-services.yml
+
+      - name: Wireguard
+        ansible.builtin.import_playbook: 05-wireguard.yml
+
+      - name: Patches
+        ansible.builtin.import_playbook: 06-patches.yml

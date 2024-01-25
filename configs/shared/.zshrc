@@ -1,8 +1,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/$USER/.oh-my-zsh"
 
-# Dark themes for things
+# Dark themes for GTK
 export GTK_THEME=Adwaita:dark
+
+# Flutter option
+export CHROME_EXECUTABLE=?
 
 # Config path for imv
 export imv_config="/home/$USER/.config/imv_config"

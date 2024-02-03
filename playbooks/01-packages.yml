@@ -37,6 +37,7 @@
                 - clang
                 - imv
                 - perl-image-exiftool
+                - less
 
       - name: Install desktop specific pacman packages
         when: type == "desktop"

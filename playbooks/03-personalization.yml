@@ -59,7 +59,7 @@
             mode: 0600
 
       - name: Generate public key from private
-        ansible.builtin.command: ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub
+        ansible.builtin.shell: ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
 
       - name: Copy client config
         ansible.builtin.copy:

@@ -5,7 +5,9 @@ export ZSH="/home/$USER/.oh-my-zsh"
 export GTK_THEME=Adwaita:dark
 
 # Flutter option
-export CHROME_EXECUTABLE=?
+export CHROME_EXECUTABLE=/sbin/chromium
+# Add dart binary to path
+export PATH=/opt/flutter/bin:$PATH
 
 # Config path for imv
 export imv_config="/home/$USER/.config/imv_config"

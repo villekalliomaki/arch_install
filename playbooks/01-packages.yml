@@ -31,6 +31,7 @@
                 - ttf-nerd-fonts-symbols
                 - noto-fonts
                 - ansible-core
+                - ansible-lint
                 - ansible
                 - neovim
                 - tmux
@@ -38,6 +39,9 @@
                 - imv
                 - perl-image-exiftool
                 - less
+                - ffmpegthumbnailer
+                - tumbler
+                - thunar
 
       - name: Install desktop specific pacman packages
         when: type == "desktop"

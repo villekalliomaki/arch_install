@@ -27,6 +27,16 @@ It includes the Ansible vault password to decrypt all encrypted variables like p
 
 It should be synced inside the repository to all devices with Syncthing which run any playbooks.
 
+## Wallpapers
+
+Metadata should be stripped before committing images to the repository. On Arch `perl-image-exiftool` has to be installed before running.
+
+Remove metadata by overwriting all image files here:
+
+```sh
+exiftool -overwrite_original -recurse -all= ./wallpapers
+```
+
 ## Troubleshooting
 
 ### Error message when installing yay

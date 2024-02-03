@@ -37,6 +37,15 @@
         become: true
         ansible.builtin.command: trust anchor --store ~/1fi.fi.crt
 
+      - name: Install vscodium extensions
+        ansible.builtin.shell: |
+            vscodium \
+              --install-extension redhat.ansible \
+              --install-extension esbenp.prettier-vscode \
+              --install-extension ms-python.python \
+              --install-extension ban.spellright \
+              --install-extension rust-lang.rust-analyzer \
+
       #
       # SSH
       #

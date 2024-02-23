@@ -64,3 +64,16 @@
             src: ../configs/shared/sshd_config
             dest: /etc/ssh/sshd_config
             mode: u=rwx,o=r
+
+      - name: Make sure /etc/ansible exists
+        become: true
+        ansible.builtin.file:
+            path: /etc/ansible
+            state: directory
+
+      - name: Copy Ansible global inventory
+        become: true
+        ansible.builtin.copy:
+            src: ../configs/shared/ansible_inventory
+            dest: /etc/ansible/hosts
+            mode: u=rwx,o=r

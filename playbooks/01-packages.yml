@@ -42,6 +42,10 @@
                 - ffmpegthumbnailer
                 - tumbler
                 - thunar
+                - xorg-xlsclients
+                - virtualbox
+                # For "linux" kernel, others need a different package
+                - virtualbox-host-modules-arch
 
       - name: Install desktop specific pacman packages
         when: type == "desktop"

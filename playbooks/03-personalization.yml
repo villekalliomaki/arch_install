@@ -45,6 +45,7 @@
               --install-extension ms-python.python \
               --install-extension ban.spellright \
               --install-extension rust-lang.rust-analyzer \
+              --install-extension samuelcolvin.jinjahtml \
 
       #
       # SSH

@@ -110,6 +110,8 @@
                 - sway-audio-idle-inhibit-git
                 - flutter
                 - ungoogled-chromium
+                # Virtualbox automatic Windows installation
+                - virtualbox-unattended-templates
 
       # https://github.com/DoTheEvo/ansible-arch/blob/cf3d0ea6ccaa4cbf6196f35327ffcb298d913e78/playbook_core.yml#L83C5-L86C22
       - name: Re-enable need for password for pacman

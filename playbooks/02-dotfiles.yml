@@ -52,6 +52,9 @@
             - src: /shared/imv_config
               dest: imv_config
 
+            - src: /shared/chromium-flags.conf
+              dest: chromium-flags.conf
+
       - name: Copy ZSH config
         ansible.builtin.copy:
             src: ../configs/shared/.zshrc

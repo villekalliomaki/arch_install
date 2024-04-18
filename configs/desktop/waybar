@@ -12,6 +12,7 @@
         "sway/window"
     ],
     "modules-right": [
+        "custom/toggle_wlsunset",
         "custom/output_headphones",
         "custom/output_tv",
         "idle_inhibitor",
@@ -85,5 +86,9 @@
             "output-input": "[ ]",
             "none": ""
         }
+    },
+    "custom/toggle_wlsunset": {
+        "format": "WLS",
+        "on-click": "~/.config/scripts/toggle_wlsunset.sh"
     }
 }

@@ -55,6 +55,9 @@
             - src: /shared/chromium-flags.conf
               dest: chromium-flags.conf
 
+            - src: /shared/scripts/
+              dest: scripts
+
       - name: Copy ZSH config
         ansible.builtin.copy:
             src: ../configs/shared/.zshrc

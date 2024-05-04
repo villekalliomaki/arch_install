@@ -46,6 +46,7 @@
               --install-extension ban.spellright \
               --install-extension rust-lang.rust-analyzer \
               --install-extension samuelcolvin.jinjahtml \
+              --install-extension pascalreitermann93.vscode-yaml-sort \
 
       #
       # SSH
